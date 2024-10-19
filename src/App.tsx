@@ -4,6 +4,7 @@ import {
   createViewWeek,
   createViewMonthGrid,
   createViewDay,
+  createViewMonthAgenda,
 } from "@schedule-x/calendar";
 import "@schedule-x/theme-default/dist/calendar.css";
 import { createEventModalPlugin } from "@schedule-x/event-modal";
@@ -12,16 +13,18 @@ import { createResizePlugin } from "@schedule-x/resize";
 import { createEventsServicePlugin } from "@schedule-x/events-service";
 import { useState } from "react";
 import PopUpAddEvent from "./components/PopUpAddEvent";
+import { createCurrentTimePlugin } from "@schedule-x/current-time";
 
 import events from "./events";
 
 function App() {
   // Configuração do calendário
+  const eventModal = createEventModalPlugin();
   const [isPopUpOpen, setIsPopUpOpen] = useState(false);
   const eventsServicePlugin = createEventsServicePlugin();
 
   const calendar: any = useCalendarApp({
-    views: [createViewWeek(), createViewMonthGrid(), createViewDay()],
+    views: [createViewWeek(), createViewMonthGrid(), createViewDay(), createViewMonthAgenda()],
     events: events,
     selectedDate: "2025-01-01",
     plugins: [
@@ -29,6 +32,8 @@ function App() {
       createDragAndDropPlugin(),
       createResizePlugin(),
       eventsServicePlugin,
+      eventModal,
+      createCurrentTimePlugin()
     ],
     locale: "pt-BR",
     firstDayOfWeek: 0,
@@ -51,7 +56,6 @@ function App() {
       return `${year}-${month}-${day} ${hours}:${minutes}`;
     };
 
-    console.log("eventos salvos");
     calendar.eventsService.add({
       title: eventData.title,
       start: formatDate(eventData.start), // Converte a data de início
@@ -60,25 +64,24 @@ function App() {
     });
   };
 
-  const allEvents = calendar.eventsService.getAll();
-  console.log("Eventos atuais:", allEvents);
-
   return (
-    <>
-      <div>
-        <ScheduleXCalendar calendarApp={calendar} />
+    <div style={{ position: "relative" }}>
+      <ScheduleXCalendar calendarApp={calendar} />
 
-        <button id="AddEvent" onClick={() => setIsPopUpOpen(true)}>
-          Add event
-        </button>
+      <button
+        style={{ position: "absolute", top: "100px", left: "10px", zIndex: 1000, }}
+        id="AddEvent"
+        onClick={() => setIsPopUpOpen(true)}
+      >
+        Add event
+      </button>
 
-        <PopUpAddEvent
-          isOpen={isPopUpOpen}
-          onClose={() => setIsPopUpOpen(false)}
-          onSave={handleSaveEvent}
-        />
-      </div>
-    </>
+      <PopUpAddEvent
+        isOpen={isPopUpOpen}
+        onClose={() => setIsPopUpOpen(false)}
+        onSave={handleSaveEvent}
+      />
+    </div>
   );
 }
 

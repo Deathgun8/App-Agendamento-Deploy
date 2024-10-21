@@ -1,0 +1,31 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}  
+
+body {
+    overflow-x: hidden;
+}
+
+.list-title{
+    color: rgb(90, 90, 90);
+}
+
+.list-wrap{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100%;
+}
+
+.list-items{
+    color: rgb(90, 90, 90);
+}
+
+.submit-patient{
+    color: rgb(49, 49, 49);
+    background-color: rgb(218, 218, 218);
+}

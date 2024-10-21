@@ -1,7 +1,9 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
   text-align: center;
 }
 
@@ -12,7 +14,7 @@
   transition: filter 300ms;
 }
 .logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+  filter: drop-shadow(0 0 2em #000677aa);
 }
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
@@ -42,7 +44,18 @@
 }
 
 #AddEvent{
-  color: white;
+  color: rgb(87, 87, 87);
+  background-color: rgb(233, 233, 233);
+}
+
+#AddEvent:hover {
+  border: 1px solid rgb(143, 143, 143); /* Define a largura, estilo e cor da borda */
+  background-color: rgb(212, 212, 212);
+}
+
+#calendar-wrap{
+  position: relative;
+  width: 100%;
 }
 
 .popUp {
@@ -79,3 +92,41 @@
   color: white;
   margin-right: 10px;
 }
+
+.app-container {
+  display: flex; /* Usar flexbox para organizar o layout em linha (horizontalmente) */
+  height: 100vh; /* Preencher toda a altura da tela */
+}
+
+.sidebar {
+  width: 200px; /* Definir a largura do menu lateral */
+  background-color: #00d6c4; /* Cor de fundo para o menu */
+  padding: 30px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column; /* Organiza os itens do menu em coluna */
+  justify-content: flex-start;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar ul li {
+  color: rgb(255, 255, 255);
+  margin: 15px 0;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.sidebar ul li:hover {
+  font-weight: bold;
+}
+
+.content {
+  flex: 1; /* O conteúdo principal ocupa o espaço restante da tela */
+  padding: 20px;
+  background-color: #fff; /* Cor de fundo do conteúdo */
+}
+
